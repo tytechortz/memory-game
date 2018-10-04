@@ -1,17 +1,18 @@
 .square {
-    height: 75px;
-    width: 75px;
+    height: 100px;
+    width: 100px;
     background-color: dodgerblue;
     margin: 1px;
     border: 5px;
     border-color: black;
     text-align: center;
     color: dodgerblue;
+    font-size: 50px;
 }
 
 
 .winner {
-    color: black;
+    color: red;
     background-color: white;
 }
 

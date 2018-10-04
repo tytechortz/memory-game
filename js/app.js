@@ -1,6 +1,6 @@
 
 
-var cardsArray = ['1','1','2','2','3','3','4','4','5','5','6','6','7','7','8','8']
+var cardsArray = ['1','1','2','2','3','3','4','4','5','5','6','6','7','7','8','8', '9','9','10','10','11','11','12','12'];
 
 // fisher yates shuffle
 function shuffle(array) {
@@ -22,7 +22,7 @@ cardsArray = shuffle(cardsArray);
 console.log(cardsArray);  
 
 var i = 0;
-for(let y = 0; y < 4; y++){
+for(let y = 0; y < 6; y++){
     $('.game').append(`<div class='game-column game-column-${y}'></div>`)
     for(let x = 0; x < 4; x++){
         console.log(`number: ${i} random:${cardsArray[i]}`);
@@ -31,7 +31,8 @@ for(let y = 0; y < 4; y++){
         gameSquare.addClass(`square-${y}-${x}`)
         gameSquare.attr('x', x)
         gameSquare.attr('y', y)
-        
+        gameSquare.css('border', '5px')
+        gameSquare.css('border-color', 'black')
         $(`.game-column-${y}`).append(gameSquare)
         // console.log(gameSquare.attr('x'));
         // console.log(gameSquare.attr('y'));
@@ -62,6 +63,10 @@ for(let y = 0; y < 4; y++){
                 } else {
                     em1.removeClass('selected');
                     em2.removeClass('selected');
+                    em1.css('color', 'white');
+                    em1.css('background-color', 'red');
+                    em2.css('color', 'white');
+                    em2.css('background-color', 'red');
                     em1.addClass('winner')
                     em2.addClass('winner')
                 }
