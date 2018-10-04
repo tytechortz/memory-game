@@ -19,24 +19,32 @@ function shuffle(array) {
     return array;
   }
 cardsArray = shuffle(cardsArray);
-console.log(cardsArray);  
+//console.log(cardsArray);  
 
 var i = 0;
+var clicks = 0;
+var tries = 0;
+
 for(let y = 0; y < 6; y++){
     $('.game').append(`<div class='game-column game-column-${y}'></div>`)
     for(let x = 0; x < 4; x++){
-        console.log(`number: ${i} random:${cardsArray[i]}`);
+        //console.log(`number: ${i} random:${cardsArray[i]}`);
         const gameSquare = $(`<div id='square-${y}-${x}'>${cardsArray[i]}</div>`)
         gameSquare.addClass('square')
         gameSquare.addClass(`square-${y}-${x}`)
         gameSquare.attr('x', x)
         gameSquare.attr('y', y)
-        gameSquare.css('border', '5px')
-        gameSquare.css('border-color', 'black')
+        
+        // gameSquare.css('border', '5px')
+        // gameSquare.css('border-color', 'black')
         $(`.game-column-${y}`).append(gameSquare)
         // console.log(gameSquare.attr('x'));
         // console.log(gameSquare.attr('y'));
         gameSquare.click(function() {
+            clicks += 1/2;
+            tries = Math.floor(clicks);
+            $('#tries').text(tries);
+            console.log(tries);
             var ems = $('.selected')
             if (ems.length == 2) {
                 return
@@ -46,11 +54,11 @@ for(let y = 0; y < 6; y++){
             $(`#square-${y}-${x}`).addClass('selected');
             
             ems = $('.selected')
-            console.log(ems)
+            //console.log(ems)
             if (ems.length == 2) {
                 var em1 = $(ems[0])
                 var em2 = $(ems[1])
-                console.log(em1, em2)
+                //console.log(em1, em2)
                 if (em1.text() != em2.text()) {
                     window.setTimeout(function() {
                         em1.removeClass('selected');
@@ -58,7 +66,7 @@ for(let y = 0; y < 6; y++){
                         em1.css('color', 'dodgerblue')
                         em1.css('background-color', 'dodgerblue')
                         em2.css('color', 'dodgerblue')
-                        em2.css('background-color', 'dodgerblue')
+                        em2.css('background-color', 'dodgerblue');
                     }, 2000)
                 } else {
                     em1.removeClass('selected');
@@ -73,7 +81,6 @@ for(let y = 0; y < 6; y++){
             }
         })
         i++;
-    }
-    
+    } 
 }
 

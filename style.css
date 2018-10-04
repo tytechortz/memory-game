@@ -4,7 +4,7 @@
     background-color: dodgerblue;
     margin: 1px;
     border: 5px;
-    border-color: black;
+    border-color: black !important;
     text-align: center;
     color: dodgerblue;
     font-size: 50px;
