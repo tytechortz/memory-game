@@ -108,7 +108,7 @@ var startGame = function() {
                             em1.css('background-color', 'dodgerblue')
                             em2.css('color', 'dodgerblue')
                             em2.css('background-color', 'dodgerblue');
-                     }, 2000)
+                    }, 2000)
                     } else {
                         em1.removeClass('selected');
                         em2.removeClass('selected');
@@ -122,6 +122,6 @@ var startGame = function() {
                 }
             })
             i++;
-    } 
+        } 
     }
 }
