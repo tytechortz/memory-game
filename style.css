@@ -3,8 +3,9 @@
     width: 100px;
     background-color: dodgerblue;
     margin: 1px;
-    border: 5px;
-    border-color: black !important;
+    border: 3px;
+    border-color: black;
+    border-style: solid; 
     text-align: center;
     color: dodgerblue;
     font-size: 50px;
@@ -16,3 +17,7 @@
     background-color: white;
 }
 
+.selected {
+    color: dodgerblue;
+    background-color: dodgerblue;
+}
