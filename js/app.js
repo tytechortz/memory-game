@@ -6,14 +6,12 @@ var cardsArray = [];
 var i = 0;
 var clicks = 0;
 var tries = 0;
-var highScore = [];
+// var best = localStorage.getItem(highScore[0]);
+// console.log(best);
+console.log(highScore[0]);
 var z;
 
-$(".btn-primary").click(function() {
-    z = 4;
-    cardsArray = cardsArrayEasy;
-    console.log(cardsArray);
-
+//Fisher-Yates shuffle
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
   
@@ -28,9 +26,14 @@ function shuffle(array) {
     }
     return array;
   }
-  cardsArray = shuffle(cardsArray);
-  console.log(cardsArray);
-  startGame();
+
+$(".btn-primary").click(function() {
+    z = 4;
+    cardsArray = cardsArrayEasy;
+    //console.log(cardsArray);
+    cardsArray = shuffle(cardsArray);
+    //console.log(cardsArray);
+    startGame();
 });
 console.log(cardsArray);
 
@@ -39,29 +42,14 @@ $(".btn-secondary").click(function() {
     z = 6;
     cardsArray = cardsArrayHard;
     console.log(cardsArray);
-
-// fisher yates shuffle
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-  
-    while (0 !== currentIndex) {
-  
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-    return array;
-  }
-  cardsArray = shuffle(cardsArray);
-  console.log(cardsArray); 
-  startGame(); 
+    cardsArray = shuffle(cardsArray);
+    console.log(cardsArray); 
+    startGame(); 
 });
 
 var startGame = function() {
-
+    var matches = 0;
+    //console.log(matches);
     for(let y = 0; y < z; y++){
         $('.game').append(`<div class='game-column game-column-${y}'></div>`)
         for(let x = 0; x < 4; x++){
@@ -78,13 +66,19 @@ var startGame = function() {
 
 
             gameSquare.click(function() {
+                var highScore = [50];
                 clicks += 1/2;
                 tries = Math.floor(clicks);
                 $('#tries').text(tries);
-                if (tries >= highScore[0]) {
-                    highScore.push(tries);
+                if (tries <= highScore[0]) {
+                    //highScore.shift();
+                    highScore.unshift(tries);
+                    console.log(highScore[0]);
+                    
+                    localStorage.setItem('highScore', highScore[0]);
+                    
                 }
-                $('#highScore').text(highScore[0]);
+                
 
                 var ems = $('.selected')
                 if (ems.length == 2) {
@@ -110,6 +104,8 @@ var startGame = function() {
                             em2.css('background-color', 'dodgerblue');
                     }, 2000)
                     } else {
+                        matches ++;
+                        console.log(matches);
                         em1.removeClass('selected');
                         em2.removeClass('selected');
                         em1.css('color', 'white');
@@ -118,6 +114,13 @@ var startGame = function() {
                         em2.css('background-color', 'red');
                         em1.addClass('winner')
                         em2.addClass('winner')
+                        //console.log(z);
+                        if((matches / z) == 2) {
+                            window.setTimeout(function() {
+                            alert("Righteous!");
+                            document.location.reload();
+                            }, 1000)
+                        }
                     }
                 }
             })
@@ -125,3 +128,5 @@ var startGame = function() {
         } 
     }
 }
+localStorage.getItem('highScore');
+$('#highScore').text(localStorage.getItem('highScore'));
